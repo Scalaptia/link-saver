@@ -8,6 +8,7 @@ const deleteItemBtn = document.querySelector("#delete-item-btn")
 const localStorageLinks = JSON.parse(localStorage.getItem("myLinks"))
 
 
+
 if (localStorageLinks) {
     myLinks = localStorageLinks
     render(myLinks)
@@ -21,11 +22,17 @@ function render(links) {
     ulEl.innerHTML = listItems
 }
 
-saveButton.addEventListener("click", function(){
+function save() {
     myLinks.push(inputField.value)
     inputField.value = ""
     localStorage.setItem("myLinks", JSON.stringify(myLinks))
     render(myLinks)
+}
+
+saveButton.addEventListener("click", function(){
+    if (inputField.value) {
+        save()
+    }
 })
 
 tabButton.addEventListener("click", function(){
