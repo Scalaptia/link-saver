@@ -22,17 +22,23 @@ function render(links) {
     ulEl.innerHTML = listItems
 }
 
-function save() {
-    myLinks.push(inputField.value)
-    inputField.value = ""
-    localStorage.setItem("myLinks", JSON.stringify(myLinks))
-    render(myLinks)
+function saveInput() {
+    if (inputField.value) {
+        myLinks.push(inputField.value)
+        inputField.value = ""
+        localStorage.setItem("myLinks", JSON.stringify(myLinks))
+        render(myLinks)
+    }
 }
 
-saveButton.addEventListener("click", function(){
-    if (inputField.value) {
-        save()
+inputField.addEventListener("keydown", function(e) {
+    if (e.code === "Enter")  {
+        saveInput();
     }
+});
+
+saveButton.addEventListener("click", function(){
+    saveInput()
 })
 
 tabButton.addEventListener("click", function(){
@@ -59,4 +65,4 @@ ulEl.addEventListener("click", function(event){
         localStorage.setItem("myLinks", JSON.stringify(myLinks))
         render(myLinks)
     }
-  });
+});
