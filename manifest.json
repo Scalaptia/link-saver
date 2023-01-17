@@ -1,8 +1,13 @@
 {
     "manifest_version": 3,
     "version": "1.2",
-    "name": "Link saver",
+    "name": "Link Saver",
     "permissions": ["tabs"],
+    "icons": {
+        "16": "images/icon.png",
+        "48": "images/icon.png",
+        "128": "images/icon.png"
+    },
     "action": {
         "default_popup": "index.html",
         "default_icon": "images/icon.png"
