@@ -6,12 +6,22 @@ const deleteButton = document.querySelector("#delete-btn")
 const ulEl = document.querySelector("#ul-el")
 const deleteItemBtn = document.querySelector("#delete-item-btn")
 const changeThemeBtn = document.querySelector("#theme-toggle-btn")
+const closeAlertBtn = document.querySelector("#close-alert-btn");
+const alertEl = document.querySelector("#alert-el");
+const alertDialog = document.querySelector("#alert-dialog");
+const preferedTheme = localStorage.getItem("preferedTheme")
+const root = document.documentElement;
 const localStorageLinks = JSON.parse(localStorage.getItem("myLinks"))
+const urlPattern = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
+
+if (preferedTheme) {
+    root.className = preferedTheme
+}
 
 function changeTheme() {
-    const root = document.documentElement;
     const newTheme = root.className === 'dark' ? 'light' : 'dark';
     root.className = newTheme;
+    localStorage.setItem("preferedTheme", newTheme)
 }
 
 if (localStorageLinks) {
@@ -29,11 +39,20 @@ function render(links) {
 
 function saveInput() {
     if (inputField.value) {
-        myLinks.push(inputField.value)
-        inputField.value = ""
-        localStorage.setItem("myLinks", JSON.stringify(myLinks))
-        render(myLinks)
+        if(urlPattern.test(inputField.value)){
+            myLinks.push(inputField.value);
+            inputField.value = "";
+            localStorage.setItem("myLinks", JSON.stringify(myLinks));
+            render(myLinks);
+        }else{
+            showAlert()
+        }
     }
+}
+
+function showAlert(){
+    alertEl.style.display = "flex"
+    alertDialog.textContent = "Please enter a valid URL"
 }
 
 inputField.addEventListener("keydown", function(e) {
@@ -75,3 +94,7 @@ ulEl.addEventListener("click", function(event){
 changeThemeBtn.addEventListener("click", function(){
     changeTheme()
 })
+
+closeAlertBtn.addEventListener("click", function(){
+    alertEl.style.display = "none";
+});
