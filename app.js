@@ -6,21 +6,21 @@ const deleteButton = document.querySelector("#delete-btn")
 const ulEl = document.querySelector("#ul-el")
 const deleteItemBtn = document.querySelector("#delete-item-btn")
 const changeThemeBtn = document.querySelector("#theme-toggle-btn")
-const closeAlertBtn = document.querySelector("#close-alert-btn");
-const alertEl = document.querySelector("#alert-el");
-const alertDialog = document.querySelector("#alert-dialog");
+const closeAlertBtn = document.querySelector("#close-alert-btn")
+const alertEl = document.querySelector("#alert-el")
+const alertDialog = document.querySelector("#alert-dialog")
 const preferedTheme = localStorage.getItem("preferedTheme")
-const root = document.documentElement;
 const localStorageLinks = JSON.parse(localStorage.getItem("myLinks"))
 const urlPattern = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
+const root = document.documentElement
 
 if (preferedTheme) {
     root.className = preferedTheme
 }
 
 function changeTheme() {
-    const newTheme = root.className === 'dark' ? 'light' : 'dark';
-    root.className = newTheme;
+    const newTheme = root.className === 'dark' ? 'light' : 'dark'
+    root.className = newTheme
     localStorage.setItem("preferedTheme", newTheme)
 }
 
@@ -32,7 +32,7 @@ if (localStorageLinks) {
 function render(links) {
     let listItems = ""
     for (i = 0; i < links.length; i++) {
-        listItems += `<li><a href="${links[i]}" target="_blank">${links[i]}</a><div id="delete-item-btn"><img src="images/trash.png" /></div></li>`
+        listItems += `<li><a href="${links[i]}" target="_blank">${links[i]}</a><div id="delete-item-btn"><img src="images/trash.png" alt="trash"/></div></li>`
     }
     ulEl.innerHTML = listItems
 }

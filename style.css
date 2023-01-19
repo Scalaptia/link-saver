@@ -4,14 +4,19 @@
     --highlight-color: #434346;
     --text-color: white;
     --alert-bg: black;
+    --invert-img: invert(100%)
 }
 
-:root {
+:root.light {
     --bg-color: white;
     --cont-bg-color: #E4E6E9;
     --highlight-color: #bfc0c2;
     --text-color: black;
     --alert-bg: white;
+}
+
+img {
+    filter: var(--invert-img);
 }
 
 body {
@@ -28,11 +33,6 @@ body {
     width: 400px;
 }
 
-#title {
-    color: var(--text-color);
-    font-size: 1.25rem;
-}
-
 #config {
     display: flex;
     flex-direction: row;
@@ -42,9 +42,15 @@ body {
     align-items: center;
 }
 
+#title {
+    color: var(--text-color);
+    font-size: 1.25rem;
+}
+
 #theme-toggle-btn {
     height: 1.25rem;
     width: 1.25rem;
+    margin-right: 5px;
 }
 
 #input-el {
@@ -135,6 +141,7 @@ body {
 }
 
 #alert-el {
+    border-radius: 10px;
     background-color: var(--alert-bg);
     color: var(--text-color);
     display: none;
@@ -144,14 +151,13 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 15px;
-    text-align: center;
     font-size: 0.85rem;
 }
 
 #close-alert-btn {
-    font-size: 18px;
+    font-size: 1rem;
     color: var(--text-color);
-    font-weight: bold;
+    font-weight: bolder;
     border: none;
     background-color: transparent;
     cursor: pointer;
