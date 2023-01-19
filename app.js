@@ -5,9 +5,14 @@ const tabButton = document.querySelector("#tab-btn")
 const deleteButton = document.querySelector("#delete-btn")
 const ulEl = document.querySelector("#ul-el")
 const deleteItemBtn = document.querySelector("#delete-item-btn")
+const changeThemeBtn = document.querySelector("#theme-toggle-btn")
 const localStorageLinks = JSON.parse(localStorage.getItem("myLinks"))
 
-
+function changeTheme() {
+    const root = document.documentElement;
+    const newTheme = root.className === 'dark' ? 'light' : 'dark';
+    root.className = newTheme;
+}
 
 if (localStorageLinks) {
     myLinks = localStorageLinks
@@ -66,3 +71,7 @@ ulEl.addEventListener("click", function(event){
         render(myLinks)
     }
 });
+
+changeThemeBtn.addEventListener("click", function(){
+    changeTheme()
+})
